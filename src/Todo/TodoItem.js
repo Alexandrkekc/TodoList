@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const styles = {
   li: {
@@ -14,7 +15,7 @@ const styles = {
     marginRight: '1rem',
   },
 };
-export default function TodoItem({ todo, index, onChange }) {
+function TodoItem({ todo, index, onChange }) {
   console.log('todo', todo);
   return (
     <li style={styles.li}>
@@ -32,3 +33,11 @@ export default function TodoItem({ todo, index, onChange }) {
     </li>
   );
 }
+
+TodoItem.propTypes = {
+  todo: PropTypes.object.isRequired,
+  index: PropTypes.number,
+  onChange: PropTypes.func.isRequired,
+};
+
+export default TodoItem;
