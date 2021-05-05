@@ -1,0 +1,19 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "node": true,
+    "es6": true
+  },
+  "parserOptions": {
+    "parser": "babel-eslint",
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "extends": ["plugin:react/recommended", "plugin:prettier/recommended"],
+  "plugins": [],
+  "rules": {
+    "react/prop-types": 1
+  }
+}
