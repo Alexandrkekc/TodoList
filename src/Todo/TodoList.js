@@ -1,9 +1,9 @@
-import React from "react";
-import TodoItem from "./TodoItem";
+import React from 'react';
+import TodoItem from './TodoItem';
 
 const styles = {
   ul: {
-    listStyle: "none",
+    listStyle: 'none',
     margin: 0,
     padding: 0,
   },
