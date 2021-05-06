@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-
+import Button from '@material-ui/core/Button';
 function AddTodo({ onCreate }) {
   const [value, setValue] = useState('');
 
@@ -16,7 +16,7 @@ function AddTodo({ onCreate }) {
   return (
     <form style={{ marginBottom: '1rem' }} onSubmit={submitHandler}>
       <input value={value} onChange={(event) => setValue(event.target.value)} />
-      <button type="submit">AddTodo</button>
+      <Button type="submit">Добавить запись</Button>
     </form>
   );
 }

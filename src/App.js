@@ -5,9 +5,10 @@ import AddTodo from './Todo/AddTodo';
 
 function App() {
   let [todos, setTodos] = React.useState([
-    { id: 1, completed: false, title: 'Купить хлеб' },
-    { id: 2, completed: false, title: 'Купить молоко' },
-    { id: 3, completed: false, title: 'Купить масло' },
+    { id: 1, completed: false, title: 'HTML5' },
+    { id: 2, completed: false, title: 'CSS3' },
+    { id: 3, completed: false, title: 'JavaScript' },
+    { id: 4, completed: false, title: 'React' },
   ]);
 
   function toggleTodo(id) {
@@ -40,12 +41,12 @@ function App() {
   return (
     <Context.Provider value={{ removeTodo }}>
       <div className="wrapper">
-        <h1>React tutorial</h1>
+        <h1>Frontend tutorial</h1>
         <AddTodo onCreate={addTodo} />
         {todos.length !== 0 ? (
           <TodoList todos={todos} onToggle={toggleTodo} />
         ) : (
-          <p>No todos!</p>
+          <p>Нет записей</p>
         )}
       </div>
     </Context.Provider>

@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import Context from '../Context';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const styles = {
   li: {
@@ -8,9 +10,10 @@ const styles = {
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: '.5rem 1rem',
-    border: '1px solid #ccc',
+    border: '2px solid black',
     borderRadius: '4px',
     marginBottom: '.5rem',
+    fontSize: '18px',
   },
   input: {
     marginRight: '1rem',
@@ -24,6 +27,7 @@ function TodoItem({ todo, index, onChange }) {
   if (todo.completed) {
     classes.push('done');
   }
+
   return (
     <li style={styles.li}>
       <span className={classes.join(' ')}>
@@ -37,9 +41,9 @@ function TodoItem({ todo, index, onChange }) {
         &nbsp;
         {todo.title}
       </span>
-      <button className="rm" onClick={() => removeTodo(todo.id)}>
-        &times;
-      </button>
+      <IconButton aria-label="delete" onClick={() => removeTodo(todo.id)}>
+        <DeleteIcon />
+      </IconButton>
     </li>
   );
 }
