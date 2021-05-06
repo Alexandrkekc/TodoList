@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Context from '../Context';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { FullscreenExit } from '@material-ui/icons';
 
 const styles = {
   li: {

@@ -1,15 +1,34 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import Modal from './Modal/Modal';
 import TodoList from './Todo/TodoList';
 import Context from './Context';
-import AddTodo from './Todo/AddTodo';
+
+import Loader from './Loader';
+
+const AddTodo = React.lazy(
+  () =>
+    new Promise((resolve) => {
+      setTimeout(() => resolve(import('./Todo/AddTodo')), 1000);
+    })
+);
 
 function App() {
   let [todos, setTodos] = React.useState([
-    { id: 1, completed: false, title: 'HTML5' },
-    { id: 2, completed: false, title: 'CSS3' },
-    { id: 3, completed: false, title: 'JavaScript' },
-    { id: 4, completed: false, title: 'React' },
+    // { id: 1, completed: false, title: 'HTML5' },
+    // { id: 2, completed: false, title: 'CSS3' },
+    // { id: 3, completed: false, title: 'JavaScript' },
+    // { id: 4, completed: false, title: 'React' },
   ]);
+  const [loading, setLoading] = React.useState(true);
+
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/todos?_limit=5')
+      .then((response) => response.json())
+      .then((todos) => {
+        setTodos(todos);
+        setLoading(false);
+      });
+  }, []);
 
   function toggleTodo(id) {
     setTodos(
@@ -42,11 +61,16 @@ function App() {
     <Context.Provider value={{ removeTodo }}>
       <div className="wrapper">
         <h1>Frontend tutorial</h1>
-        <AddTodo onCreate={addTodo} />
+        <Modal />
+        <React.Suspense fallback={<Loader />}>
+          <AddTodo onCreate={addTodo} />
+        </React.Suspense>
+
+        {loading && <Loader />}
         {todos.length !== 0 ? (
           <TodoList todos={todos} onToggle={toggleTodo} />
-        ) : (
-          <p>Нет записей</p>
+        ) : loading ? null : (
+          <p>Нет Записей</p>
         )}
       </div>
     </Context.Provider>

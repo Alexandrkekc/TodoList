@@ -13,16 +13,29 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
+
+function useTextFieldValue(defaultValue = '') {
+  const [value, setValue] = useState(defaultValue);
+
+  return {
+    bind: {
+      value,
+      onChange: (event) => setValue(event.target.value),
+    },
+    clear: () => setValue(''),
+    value: () => value,
+  };
+}
 function AddTodo({ onCreate }) {
-  const [value, setValue] = useState('');
   const classes = useStyles();
+  const textField = useTextFieldValue('');
 
   function submitHandler(event) {
     event.preventDefault();
 
-    if (value.trim()) {
-      onCreate(value);
-      setValue('');
+    if (textField.value().trim()) {
+      onCreate(textField.value());
+      textField.clear();
     }
   }
 
@@ -33,13 +46,7 @@ function AddTodo({ onCreate }) {
       autoComplete="off"
       onSubmit={submitHandler}
     >
-      <TextField
-        id="standard-basic"
-        label="Новая запись"
-        value={value}
-        onChange={(event) => setValue(event.target.value)}
-      />
-      {/* <input value={value} onChange={(event) => setValue(event.target.value)} /> */}
+      <TextField id="standard-basic" label="Новая запись" {...textField.bind} />
       <Button type="submit">Добавить</Button>
     </form>
   );
